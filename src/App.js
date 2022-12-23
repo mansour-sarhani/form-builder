@@ -8,7 +8,7 @@ import {
 
 import Home from "./components/home/Home";
 import {FormProvider} from "./context/formProvider";
-import CreateForm from "./pages/CreateForm";
+import CreateForm from "./components/forms/CreateForm";
 import ViewForm from "./components/forms/ViewForm";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

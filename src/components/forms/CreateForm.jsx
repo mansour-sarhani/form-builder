@@ -1,9 +1,9 @@
 import {useState} from "react";
 import {v4 as uuidv4} from 'uuid';
-import {useFormDispatch} from "../context/formProvider";
-import NewField from "../components/fields/NewField";
+import {useFormDispatch} from "../../context/formProvider";
+import NewField from "../fields/NewField";
 import {Link, useNavigate} from "react-router-dom";
-import FormField from "../components/fields/FormField";
+import FormField from "../fields/FormField";
 import {toast} from "react-toastify";
 
 function CreateForm() {
