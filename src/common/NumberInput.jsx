@@ -1,22 +1,36 @@
-function NumberInput({field}) {
+import RequiredField from "./RequiredField";
+import OptionalField from "./OptionalField";
+import {Field} from "formik";
+
+function validateNumber(value) {
+    let error;
+    if (!value) {
+        error = 'Required';
+    }
+    return error;
+}
+
+function NumberInput({field, touched, errors}) {
+
     return (
         <div className="form-group mb-3">
             <label
                 htmlFor={field.fieldId}
                 className="form-label"
             >
-                {field.displayTitle}
+                {field.displayTitle} {field.required === 'yes' ? <RequiredField /> : <OptionalField />}
             </label>
-            <input
+            <Field
                 type="number"
                 className="form-control"
+                name={field.name}
                 id={field.fieldId}
-                aria-describedby={field.displayTitle}
-                min='0'
+                validate={field.required === 'yes' ? validateNumber : null}
             />
             <div className="form-text">
                 {field.description}
             </div>
+            {errors[field.name] && touched[field.name] && <div className="text-danger">{errors[field.name]}</div>}
         </div>
     );
 }

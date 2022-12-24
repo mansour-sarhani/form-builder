@@ -13,6 +13,7 @@ import ViewForm from "./components/forms/ViewForm";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EditForm from "./components/forms/EditForm";
+import FrontForm from "./components/forms/FrontForm";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/new-form" element={<CreateForm />} />,
             <Route path="/view-form/:formId" element={<ViewForm />} />,
             <Route path="/edit-form/:formId" element={<EditForm />} />,
+            <Route path="/front-form" element={<FrontForm />} />,
         ])
     );
 

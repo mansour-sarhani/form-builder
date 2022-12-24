@@ -1,5 +1,16 @@
-function SelectInput({field}) {
+import RequiredField from "./RequiredField";
+import OptionalField from "./OptionalField";
+import {Field} from "formik";
 
+function validateSelect(value) {
+    let error;
+    if (!value) {
+        error = 'Required';
+    }
+    return error;
+}
+
+function SelectInput({field, touched, errors}) {
     const options = field.options
     const optionsArray = options.split(',');
     const renderedOptions = optionsArray ? optionsArray.map((option, index) => <option key={index} value={option}>{option}</option>) : <p>Loading ...</p>
@@ -10,18 +21,21 @@ function SelectInput({field}) {
                 htmlFor={field.fieldId}
                 className="form-label"
             >
-                {field.displayTitle}
+                {field.displayTitle} {field.required === 'yes' ? <RequiredField /> : <OptionalField />}
             </label>
-            <select
+            <Field
+                as="select"
+                name={field.name}
                 id={field.fieldId}
                 className="form-select"
-                aria-label="Default select example"
+                validate={field.required === 'yes' ? validateSelect : null}
             >
                 {renderedOptions}
-            </select>
+            </Field>
             <div className="form-text">
                 {field.description}
             </div>
+            {errors[field.name] && touched[field.name] && <div className="text-danger">{errors[field.name]}</div>}
         </div>
     );
 }

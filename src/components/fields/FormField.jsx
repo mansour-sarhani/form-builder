@@ -9,39 +9,39 @@ import SelectInput from "../../common/SelectInput";
 import TextAreaInput from "../../common/TextAreaInput";
 import TelInput from "../../common/TelInput";
 
-function FormField({field, index}) {
+function FormField({field, index, touched, errors}) {
 
-    function fieldTypeCreator(field, index) {
+    function fieldTypeCreator(field, index, touched, errors) {
         switch (field.fieldType) {
             case 'text' : {
-                return <TextInput field={field} />
+                return <TextInput field={field} touched={touched} errors={errors} />
             }
             case 'number' : {
-                return <NumberInput field={field} />
+                return <NumberInput field={field} touched={touched} errors={errors} />
             }
             case 'tel' : {
-                return <TelInput field={field} />
+                return <TelInput field={field} touched={touched} errors={errors} />
             }
             case 'checkbox' : {
-                return <CheckBoxInput field={field} />
+                return <CheckBoxInput field={field} touched={touched} errors={errors} />
             }
             case 'html' : {
-                return <HtmlInput field={field} />
+                return <HtmlInput field={field} touched={touched} errors={errors} />
             }
             case 'date' : {
-                return <DateInput field={field} />
+                return <DateInput field={field} touched={touched} errors={errors} />
             }
             case 'dateRange' : {
-                return <DateRangeInput field={field} />
+                return <DateRangeInput field={field} touched={touched} errors={errors} />
             }
             case 'radio' : {
-                return <RadioInput field={field} index={index} />
+                return <RadioInput field={field} index={index} touched={touched} errors={errors} />
             }
             case 'dropdown' : {
-                return <SelectInput field={field} />
+                return <SelectInput field={field} touched={touched} errors={errors} />
             }
             case 'textarea' : {
-                return <TextAreaInput field={field} />
+                return <TextAreaInput field={field} touched={touched} errors={errors} />
             }
             default: {
                 return
@@ -51,7 +51,7 @@ function FormField({field, index}) {
 
     return (
         <div className="form-field">
-            {fieldTypeCreator(field, index)}
+            {fieldTypeCreator(field, index, touched, errors)}
         </div>
     );
 }

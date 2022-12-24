@@ -1,30 +1,30 @@
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import RequiredField from "./RequiredField";
+import OptionalField from "./OptionalField";
+import HtmlField from "./HtmlField";
 
-function HtmlInput({field}) {
+function validateHtml(data) {
+    let error;
+    if (!data) {
+        error = 'Required';
+    }
+    return error;
+}
+
+function HtmlInput({field, touched, errors}) {
     return (
         <div className="form-group mb-3">
             <label
                 htmlFor={field.fieldId}
                 className="form-label"
             >
-                {field.displayTitle}
+                {field.displayTitle} {field.required === 'yes' ? <RequiredField /> : <OptionalField />}
             </label>
-            <CKEditor
-                id={field.fieldId}
-                editor={ ClassicEditor }
-                data=""
-                onReady={ ( editor ) => {
-                    console.log( "CKEditor5 React Component is ready to use!", editor );
-                } }
-                onChange={ ( event, editor ) => {
-                    const data = editor.getData();
-                    console.log( { event, editor, data } );
-                } }
-            />
+            <HtmlField name={field.name} validate={field.required === 'yes' ? validateHtml : null} />
+
             <div className="form-text">
                 {field.description}
             </div>
+            {errors[field.name] && touched[field.name] && <div className="text-danger">{errors[field.name]}</div>}
         </div>
     );
 }

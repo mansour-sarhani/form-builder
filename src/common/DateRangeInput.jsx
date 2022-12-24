@@ -1,17 +1,17 @@
-import 'react-date-range/dist/styles.css';
-import 'react-date-range/dist/theme/default.css';
-import { DateRange } from 'react-date-range';
-import {useState} from "react";
+import "react-datepicker/dist/react-datepicker.css";
+import RequiredField from "./RequiredField";
+import OptionalField from "./OptionalField";
+import DateRangePickerField from "./DateRangePickerField";
 
-function DateRangeInput({field}) {
+function validateDateRange(value) {
+    let error;
+    if (!value) {
+        error = 'Required';
+    }
+    return error;
+}
 
-    const [state, setState] = useState([
-        {
-            startDate: new Date(),
-            endDate: null,
-            key: 'selection'
-        }
-    ]);
+function DateRangeInput({field, touched, errors}) {
 
     return (
         <div className="form-group mb-3">
@@ -19,20 +19,13 @@ function DateRangeInput({field}) {
                 htmlFor={field.fieldId}
                 className="form-label"
             >
-                {field.displayTitle}
+                {field.displayTitle} {field.required === 'yes' ? <RequiredField /> : <OptionalField />}
             </label>
-            <div className="dateRange">
-                <DateRange
-                    id={field.fieldId}
-                    editableDateInputs={true}
-                    onChange={item => setState([item.selection])}
-                    moveRangeOnFirstSelection={false}
-                    ranges={state}
-                />
-            </div>
+            <DateRangePickerField name={field.name} validate={field.required === 'yes' ? validateDateRange : null} />
             <div className="form-text">
                 {field.description}
             </div>
+            {errors[field.name] && touched[field.name] && <div className="text-danger">{errors[field.name]}</div>}
         </div>
     );
 }

@@ -9,14 +9,6 @@ a:focus {
     text-decoration: none;
 }
 
-.create-new-form {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 30px ;
-}
-
 .list-container {
     width: 100%;
     display: flex;
@@ -86,4 +78,24 @@ a:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.required {
+    color: red;
+    font-weight: 500;
+}
+
+.home-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.home-header-item {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }

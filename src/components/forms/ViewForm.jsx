@@ -1,6 +1,7 @@
 import {Link, useParams} from "react-router-dom";
 import {useFormState} from "../../context/formProvider";
 import FormField from "../fields/FormField";
+import {Form, Formik} from "formik";
 
 function ViewForm() {
     const forms = useFormState()
@@ -8,9 +9,7 @@ function ViewForm() {
     const currentFormIndex = forms.findIndex(form => form.formId === formId)
     const currentForm = forms[currentFormIndex]
 
-    const renderedFields = currentForm && currentForm.fields.map((field, index) =>
-        <FormField index={index} key={field.fieldId} field={field} />
-    )
+    const namesArray = currentForm && currentForm.fields.map(field => field.name)
 
     if (!currentForm) {
         return <p>Loading ...</p>
@@ -26,7 +25,29 @@ function ViewForm() {
                     </button>
                 </div>
                 <div className="view-form-fields">
-                    {renderedFields}
+                    <Formik
+                        enableReinitialize={true}
+                        initialValues={
+                            namesArray.reduce((o, key) => ({ ...o, [key]: ''}), {})
+                        }
+                        onSubmit={values => {
+                            alert(JSON.stringify(values, null, 2));
+                        }}
+                    >
+                        {({ errors, touched }) => (
+                            <Form>
+                                {currentForm && currentForm.fields.map((field, index) =>
+                                    <FormField
+                                        index={index}
+                                        key={field.fieldId}
+                                        field={field}
+                                        errors={errors}
+                                        touched={touched}
+                                    />
+                                )}
+                            </Form>
+                        )}
+                    </Formik>
                 </div>
             </div>
         )
