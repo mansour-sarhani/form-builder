@@ -67,6 +67,9 @@ function NewField({field, fields, setFormFields, index}) {
                                             <div className="form-field mb-3">
                                                 <label htmlFor="name" className="form-label">Field Name</label>
                                                 <Field name="name" className="form-control" id="name"/>
+                                                <div className="form-text">
+                                                    The value of this field should be unique in this form.
+                                                </div>
                                                 {errors.name && touched.name ? (
                                                     <div>{errors.name}</div>
                                                 ) : null}

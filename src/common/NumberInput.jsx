@@ -1,16 +1,19 @@
 import RequiredField from "./RequiredField";
 import OptionalField from "./OptionalField";
 import {Field} from "formik";
-
-function validateNumber(value) {
-    let error;
-    if (!value) {
-        error = 'Required';
-    }
-    return error;
-}
+import {useState} from "react";
 
 function NumberInput({field, touched, errors}) {
+    const [formatNum, setFormatNum] = useState('');
+
+    function validateNumber(value) {
+        let error;
+        setFormatNum(value)
+        if (!value) {
+            error = 'Required';
+        }
+        return error;
+    }
 
     return (
         <div className="form-group mb-3">
@@ -27,6 +30,7 @@ function NumberInput({field, touched, errors}) {
                 id={field.fieldId}
                 validate={field.required === 'yes' ? validateNumber : null}
             />
+            {formatNum && <span className="formattedNum">{formatNum.toLocaleString()}</span>}
             <div className="form-text">
                 {field.description}
             </div>

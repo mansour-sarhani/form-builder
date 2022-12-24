@@ -99,3 +99,9 @@ a:focus {
     align-items: center;
     justify-content: space-evenly;
 }
+
+.formattedNum {
+    display: flex;
+    color: #adadad;
+    padding-left: 10px;
+}

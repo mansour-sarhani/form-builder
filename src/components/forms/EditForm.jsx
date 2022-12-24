@@ -84,7 +84,7 @@ function EditForm() {
             <div className="create-form-fields">
                 <div className="field-item-row">
                     <div className="row">
-                        <div className="col">
+                        <div className="col col-md-7">
                             <h4>Fields</h4>
                             <div className="list-container">
                                 <div className="accordion" id="fieldsAccordion">
@@ -94,7 +94,7 @@ function EditForm() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col">
+                        <div className="col col-md-5">
                             <h4>Form Preview</h4>
                             <Formik
                                 enableReinitialize={true}
